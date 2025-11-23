@@ -2,7 +2,7 @@
 #define HEADAR_H
 
 #include <iostream>
-#include <iomanip>// this for the setw how set field width
+#include <iomanip>
 #include <string>
 #include "Contact.hpp"
 #include "PhoneBook.hpp"

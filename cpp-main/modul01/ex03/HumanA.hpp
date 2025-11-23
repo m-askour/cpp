@@ -8,7 +8,6 @@ class HumanA
 private:
     std::string name;
     Weapon &Type;
-    /* data */
 public:
     HumanA(std::string name, Weapon &type);
     ~HumanA();

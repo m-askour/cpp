@@ -35,7 +35,7 @@ public:
     int getRawBits(void) const;
     void setRawBits(int const raw);
     float toFloat( void ) const;//this function converts the fixed-point value to a floating-point value
-    int toInt( void ) const;
+    int toInt( void ) const;//this function converts the fixed-point value to a int value
     static Fixed &min(Fixed &a, Fixed &b); // Returns the minimum of two Fixed objects
     static const Fixed &min(const Fixed &a, const Fixed &b); // Returns the
     static Fixed &max(Fixed &a, Fixed &b); // Returns the maximum of two Fixed objects

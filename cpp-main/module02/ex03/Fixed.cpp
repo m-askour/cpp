@@ -27,24 +27,29 @@ Fixed   Fixed::operator/(const Fixed &other) const
 {
     return (Fixed)(toFloat() / other.toFloat());
 }
-Fixed  & Fixed::operator++()              // Prefix increment operator
+Fixed  & Fixed::operator++()
 {
     this->fixed_point += 1;
     return (*this);
 }
-Fixed   Fixed::operator++(int)            // Postfix increment operator
+Fixed   Fixed::operator++(int)
 {
+    Fixed old_val = *this;
 
-    
+    this->fixed_point +=1;
+    return old_val;
 }
-Fixed  & Fixed::operator--()              // Prefix decrement operator
+Fixed  & Fixed::operator--()
 {
     this->fixed_point -= 1;
     return (*this);
 }
 Fixed   Fixed::operator--(int)
 {   
-
+    Fixed old_val=*this;
+    
+    this->fixed_point -=-1;
+    return old_val;
 }
 bool    Fixed::operator==(const Fixed &other) const
 {
@@ -58,19 +63,19 @@ bool Fixed::operator!=(const Fixed &other) const
         return true;
     return false;
 }
-bool Fixed::operator<(const Fixed &other) const  // Less than operator
+bool Fixed::operator<(const Fixed &other) const
 {
     if (getRawBits() < other.getRawBits())
         return true;
     return false;
 }
-bool Fixed::operator<=(const Fixed &other) const // Less than or equal to operator
+bool Fixed::operator<=(const Fixed &other) const
 {
  if (getRawBits() <= other.getRawBits())
         return true;
     return false;
 }
-bool Fixed::operator>(const Fixed &other) const  // Greater than operator
+bool Fixed::operator>(const Fixed &other) const
 {
     if (getRawBits() > other.getRawBits())
         return true;
@@ -146,7 +151,7 @@ Fixed & Fixed::max(Fixed &a, Fixed &b)
     return b;
 }
 
-const Fixed & Fiexed::max(const Fixed &a, const Fixed &b)
+const Fixed & Fixed::max(const Fixed &a, const Fixed &b)
 {
     if (a > b)
         return a;

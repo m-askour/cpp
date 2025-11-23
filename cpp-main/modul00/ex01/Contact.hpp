@@ -4,17 +4,17 @@
 
 #include "headar.hpp"
 #include <string>
-
+#include <cctype>
 class Contact
 {
   private:
-  std::string firstName; // string it's an objetc the  class  string 
+  std::string firstName;
   std::string lastName;
   std::string nickname;
   std::string phoneNumber;
   std::string darkestSecret;
   public:
-  void setContact();// this si the setter function 
+  void setContact();
   void displayBrief(int i);
   void displayFull();
   void clearat();
