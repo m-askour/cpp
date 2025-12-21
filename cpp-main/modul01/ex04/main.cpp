@@ -14,7 +14,7 @@ int main (int ac,char **av)
     std::string input_name = av[1];
     std::string search_name = av[2];
     std::string replace_name = av[3];
-    std::ifstream input(input_name.c_str());//this for input file
+    std::ifstream input(input_name.c_str());
     std::string output_file = input_name + ".replace";
     std::ofstream output(output_file.c_str());
     if (!input.is_open())
@@ -24,7 +24,6 @@ int main (int ac,char **av)
     }
     while (std::getline(input,str))
     {
-        // lenght_name = search_name.length();
         size_t pos = str.find(search_name);
         if (pos != std::string::npos)
         {

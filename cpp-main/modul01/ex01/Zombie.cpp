@@ -1,9 +1,13 @@
 #include "Zombie.hpp"
-
-Zombie::Zombie(std::string name) : name(name), num(10){}
-Zombie::~Zombie(){}
+Zombie::Zombie()
+{
+}
+Zombie::Zombie(std::string name) : name(name){}
+Zombie::~Zombie(){
+    std::cout << "ditroied the Zombiez\n";
+}
 
 void Zombie::announce()
 {
-    std::cout<<"this is the zombie allocat" <<name<<"\n";
+    std::cout<<"this is the zombie allocat" <<"\n";
 }

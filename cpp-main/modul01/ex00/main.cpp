@@ -9,5 +9,3 @@ int main ()
     delete newZombie1;
     return (0);
 }
-
-
