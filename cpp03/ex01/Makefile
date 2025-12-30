@@ -1,7 +1,7 @@
-CC = c++
-CFLAGS = -Wall -Wextra -Werror -std=c++98
+CXX = c++
+CXXFLAGS = -Wall -Wextra -Werror -std=c++98
 
-NAME = Zombie
+NAME = ScavTrap
 
 FILES = ClapTrap.cpp main.cpp ScavTrap.cpp
 
@@ -10,10 +10,10 @@ OBJS = $(FILES:.cpp=.o)
 all: $(NAME)
 
 $(NAME): $(OBJS)
-	$(CC) $(CFLAGS) -o $(NAME) $(OBJS)
+	$(CXX) $(CXXFLAGS) -o $(NAME) $(OBJS)
 
 %.o: %.cpp ClapTrap.hpp ScavTrap.hpp
-	$(CC) $(CFLAGS) -c $< -o $@
+	$(CXX) $(CXXFLAGS) -c $< -o $@
 
 clean:
 	rm -f $(OBJS)

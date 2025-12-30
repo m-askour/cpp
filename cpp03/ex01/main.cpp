@@ -1,20 +1,20 @@
 #include "ClapTrap.hpp"
-
-int main ()
+#include "ScavTrap.hpp"
+int main()
 {
-    ClapTrap broslie("BrosLie");
-    ClapTrap jackichan("JackiChan");
+    ClapTrap Brosly("Brosly");
+    ClapTrap Jackichan("Jackichan");
+    ScavTrap Monster("Monster");
 
-    broslie.attack("JakiChan");
-    jackichan.takeDamage(10);
-    
-    jackichan.attack("BrosLie");
-    broslie.takeDamage(12);
+    std::cout << "\n--- ClapTrap fight ---\n";
+    Brosly.attack("Jackichan");
+    Jackichan.takeDamage(2);
 
-    broslie.beRepaired(5);
-    jackichan.beRepaired(8);
+    std::cout << "\n--- ScavTrap attack ---\n";
+    Monster.attack("Brosly");
 
-    broslie.attack("JakiChan");
-    jackichan.takeDamage(10);
+    std::cout << "\n--- Gate mode ---\n";
+    Monster.guardGate();
+
     return 0;
 }
