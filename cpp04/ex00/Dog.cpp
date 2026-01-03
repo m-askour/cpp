@@ -2,6 +2,8 @@
 
 Dog::Dog()
 {
+    std::cout<<"Dog Default constructer called"<<std::endl;
+
 }
 Dog::Dog(Dog const &other):Animal(other)
 {
@@ -15,6 +17,7 @@ Dog &Dog::operator=(Dog const &other)
 
 Dog::~Dog()
 {
+    std::cout<<"Dog Destructer called"<<std::endl;
 }
 void Dog::makeSound()const
 {

@@ -2,9 +2,12 @@
 
 Cat::Cat()
 {
+    std::cout<<"Cat Default constructer called"<<std::endl;
+
 }
 Cat::Cat(Cat const &other):Animal(other)
 {
+
 }
 Cat &Cat::operator=(Cat const &other)
 {
@@ -14,6 +17,8 @@ Cat &Cat::operator=(Cat const &other)
 }
 Cat::~Cat()
 {
+    std::cout<<"Cat Destructer called"<<std::endl;
+
 }
 void Cat::makeSound()const
 {

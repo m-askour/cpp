@@ -2,13 +2,16 @@
 
 Animal::Animal():Type("")
 {
+    std::cout<<"Animal Default constructer called"<<std::endl;
 }
 Animal::Animal(Animal const &other)
 {
+    std::cout<<"Animal Copy constructer called"<<std::endl;
     *this = other;
 }
 Animal &Animal::operator=(Animal const &other)
 {
+    std::cout<<"Animal Copy assinged called"<<std::endl;
     if (this != &other)
         this->Type = other.Type;
     return *this;
@@ -16,6 +19,8 @@ Animal &Animal::operator=(Animal const &other)
 
 Animal::~Animal()
 {
+    std::cout<<"Animal Destructer called"<<std::endl;
+
 }
 
 
