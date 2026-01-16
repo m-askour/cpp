@@ -1,6 +1,6 @@
 #include "Dog.hpp"
 
-Dog::Dog()
+Dog::Dog(): Animal("Dog")
 {
     std::cout<<"Dog Constructer called"<<std::endl;
     brain = new Brain();

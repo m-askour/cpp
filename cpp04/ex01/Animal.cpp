@@ -4,6 +4,10 @@ Animal::Animal():Type("")
 {
     std::cout<<"Animal Default constructer called"<<std::endl;
 }
+Animal::Animal(std::string type):Type(type)
+{
+    std::cout<<"Animal param constructer called"<<std::endl;
+}
 Animal::Animal(Animal const &other)
 {
     std::cout<<"Animal Copy constructer called"<<std::endl;

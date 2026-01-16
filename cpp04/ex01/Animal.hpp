@@ -8,6 +8,7 @@ protected:
     std::string Type;
 public:
     Animal();
+    Animal(std::string type);
     Animal(Animal const &other);
     Animal &operator=(Animal const &other);
     virtual ~Animal();

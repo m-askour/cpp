@@ -1,10 +1,10 @@
 #include "Cat.hpp"
 
-Cat::Cat()
+Cat::Cat():AAnimal("Cat")
 {
     brain = new Brain();
 }
-Cat::Cat(Cat const &other):Animal(other)
+Cat::Cat(Cat const &other):AAnimal(other)
 {
     brain = new Brain(*other.brain);
 }

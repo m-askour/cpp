@@ -4,10 +4,6 @@
 
 int main()
 {
-    const Animal* j = new Dog();
-    const Animal* i = new Cat();
-    delete j;//should not create a leak
-    delete i;
     Animal *arr[100];
     for (int k = 0; k < 100; k++)
     {
