@@ -5,15 +5,14 @@
 class AAnimal
 {
 protected:
-    std::string Type;
+    std::string type;
 public:
     AAnimal();
-    AAnimal(std::string type);
     AAnimal(AAnimal const &other);
     AAnimal &operator=(AAnimal const &other);
     virtual ~AAnimal();
     std::string getType()const;
-    virtual  void makeSound()const = 0;//pure virtual function 
+    virtual  void makeSound()const = 0;
 };
 
 #endif

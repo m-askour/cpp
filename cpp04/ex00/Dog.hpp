@@ -2,18 +2,17 @@
 #define DOG_HPP
 #include "Animal.hpp"
 
-class Dog: public Animal
+class Dog : public Animal
 {
 private:
-    
 public:
-    //ocf
+    // ocf
     Dog();
     Dog(Dog const &other);
     Dog &operator=(Dog const &other);
-    ~Dog();
-    //methods
-    void makeSound()const;
+    virtual ~Dog();
+    // methods
+    void makeSound() const;
 };
 
 #endif

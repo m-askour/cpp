@@ -3,17 +3,15 @@
 Brain::Brain()
 {
     std::cout<<"Brain Default constructer called"<<std::endl;
-    for (int i = 0; i < 100;i++)
-    {
-        ideas[i] = ""; 
-    }
 }
 Brain::Brain(Brain const &other)
 {
+    std::cout<<"Brain Copy constructer called"<<std::endl;
     *this = other;
 }
 Brain &Brain::operator=(Brain const &other)
 {
+    std::cout<<"Brain Copy assingment called"<<std::endl;
     if (this != &other)
     {
         for(int i = 0; i < 100; i++)
@@ -26,8 +24,4 @@ Brain &Brain::operator=(Brain const &other)
 Brain::~Brain()
 {
     std::cout<<"Brain Destructer called"<<std::endl;
-}
-std::string Brain::getRandomIdea() const
-{
-    return *ideas;
 }

@@ -1,39 +1,38 @@
 #include "Animal.hpp"
 
-Animal::Animal():Type("")
+Animal::Animal()
 {
     std::cout<<"Animal Default constructer called"<<std::endl;
-}
-Animal::Animal(std::string type):Type(type)
-{
-    std::cout<<"Animal param constructer called"<<std::endl;
+    type = "Animall";
 }
 Animal::Animal(Animal const &other)
 {
     std::cout<<"Animal Copy constructer called"<<std::endl;
     *this = other;
 }
+
 Animal &Animal::operator=(Animal const &other)
 {
     std::cout<<"Animal Copy assinged called"<<std::endl;
     if (this != &other)
-        this->Type = other.Type;
+        this->type = other.type;
     return *this;
 }
 
 Animal::~Animal()
 {
     std::cout<<"Animal Destructer called"<<std::endl;
-
 }
 
-
-std::string Animal::getType()const
+std::string Animal::getType() const
 {
-    return Type;
+    return type;
 }
-
-void Animal::makeSound()const
+// void Animal::setType(const std::string& other)
+// {
+//     this->type = other;
+// }
+void Animal::makeSound() const
 {
     std::cout<<"Unoun anim say: Groooooooo\n";
 }

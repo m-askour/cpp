@@ -1,29 +1,33 @@
 #include "AAnimal.hpp"
 
-AAnimal::AAnimal():Type("Animal")
+AAnimal::AAnimal()
 {
+    std::cout<<"AAnimal Default constructer called"<<std::endl;
+    type = "AAnimal";
 }
-AAnimal::AAnimal(std::string type):Type(type)
-{
-    std::cout<<"Animal param constructer called"<<std::endl;
-}
+
 AAnimal::AAnimal(AAnimal const &other)
 {
+    std::cout<<"AAnimal Copy constructer called"<<std::endl;
     *this = other;
 }
 AAnimal &AAnimal::operator=(AAnimal const &other)
 {
+    std::cout<<"AAnimal Copy assinged called"<<std::endl;
     if (this != &other)
-        this->Type = other.Type;
+        this->type = other.type;
     return *this;
 }
 
 AAnimal::~AAnimal()
 {
+    std::cout<<"AAnimal Destructer called"<<std::endl;
+
 }
 
 
 std::string AAnimal::getType()const
 {
-    return Type;
+    return type;
 }
+
