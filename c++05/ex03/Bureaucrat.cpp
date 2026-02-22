@@ -45,10 +45,7 @@ int Bureaucrat::signForm() const
 {
     return this->grade;
 }
-void Bureaucrat::executeForm(const AFrom & form) const
-{
-    form.execute(*this);
-}
+
 class Bureaucrat::GradeTooHighException : public std::exception
 {
     public:
