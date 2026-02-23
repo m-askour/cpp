@@ -9,9 +9,11 @@ int main()
     {
         Bureaucrat b1("John", 50);
         Bureaucrat b2("Jane", 10);
+        // AFrom f0("GenericForm", 100, 50);
         ShrubberyCreationForm f1("Home");
         RobotomyRequestForm f2("Target");
         PresidentialPardonForm f3("Victim");
+        // f0.execute(b1);
         f1.beSigned(b1);
         f2.beSigned(b2);
         f3.beSigned(b2);

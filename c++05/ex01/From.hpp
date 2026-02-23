@@ -20,9 +20,16 @@ public:
     int get_grade_sign() const;
     int get_grade_exec() const;
     void beSigned(const class Bureaucrat& bureaucrat);
-    class GradeTooHighException;
-    class GradeTooLowException;
-
+    class GradeTooHighException: public std::exception
+    {
+        public:
+            const char* what() const throw();
+    };
+    class GradeTooLowException: public std::exception
+    {
+        public:
+            const char* what() const throw();
+    };
 };
 std::ostream& operator<<(std::ostream& os, const From& from);
 

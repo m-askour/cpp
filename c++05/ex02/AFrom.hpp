@@ -21,8 +21,21 @@ public:
     int get_grade_exec() const;
     void beSigned(const class Bureaucrat& bureaucrat);
     virtual void execute(Bureaucrat const & executor) const = 0;
-    class GradeTooHighException;
-    class GradeTooLowException;
+    class GradeTooHighException: public std::exception
+    {
+        public:
+            const char* what() const throw();
+    };
+    class GradeTooLowException: public std::exception
+    {
+        public:
+            const char* what() const throw();
+    };
+    class NotSignedException : public std::exception
+    {
+        public:
+            const char* what() const throw();
+    };
 
 };
 std::ostream& operator<<(std::ostream& os, const AFrom& from);

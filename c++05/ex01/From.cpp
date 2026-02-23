@@ -50,22 +50,14 @@ void From::beSigned(const class Bureaucrat& bureaucrat)
         throw GradeTooLowException();
     this->sign = true;
 }
-class From::GradeTooHighException: public std::exception
+const char* From::GradeTooHighException::what() const throw()
 {
-    public:
-        const char* what() const throw()
-        {
             return "Grade is too high!";
-        }
-};
-class From::GradeTooLowException : public std::exception
+}
+const char* From::GradeTooLowException::what() const throw()
 {
-    public:
-        const char* what() const throw()
-        {
             return "Grade is too low!";
-        }
-};
+}
 std::ostream& operator<<(std::ostream& os, const From& from)
 {
     os << "Form Name: " << from.get_name() << ", Grade to Sign: " << from.get_grade_sign() << ", Grade to Execute: " << from.get_grade_exec() << ", Signed: " << (from.get_sign() ? "Yes" : "No");
