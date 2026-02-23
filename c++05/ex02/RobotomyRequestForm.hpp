@@ -1,6 +1,9 @@
 #ifndef ROBOTOMYREQUESTFORM_HPP
 #define ROBOTOMYREQUESTFORM_HPP
 #include "AFrom.hpp"
+#include <cstdlib>
+#include <ctime>
+
 class RobotomyRequestForm : public AFrom
 {
     private:
