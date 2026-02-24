@@ -1,24 +1,24 @@
 #include "ScalarConverter.hpp"
 
-ScalarConverter1::ScalarConverter1(/* args */)
+ScalarConverter::ScalarConverter(/* args */)
 {
 }
 
-ScalarConverter1::ScalarConverter1(const ScalarConverter1 &other)
+ScalarConverter::ScalarConverter(const ScalarConverter &other)
 {
     *this = other;
 }
 
-ScalarConverter1 &ScalarConverter1::operator=(const ScalarConverter1 &other)
+ScalarConverter &ScalarConverter::operator=(const ScalarConverter &other)
 {
     return *this;
 }
 
-ScalarConverter1::~ScalarConverter1()
+ScalarConverter::~ScalarConverter()
 {
 }
 
-void ScalarConverter1::convert(const std::string &literal)
+void ScalarConverter::convert(const std::string &literal)
 {
     // Implementation of the conversion logic goes here
     // This function should parse the input literal and convert it to char, int, float, and double
