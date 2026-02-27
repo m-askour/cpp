@@ -2,12 +2,14 @@
 #define SCALAR_CONVERTER_HPP
 #include <iostream>
 #include <string>
+#include <limits>
+#include <cmath>
 class ScalarConverter
 {
 private:
-    ScalarConverter(/* args */);
+    ScalarConverter();
     ScalarConverter(const ScalarConverter &other);
-    ScalarConverter &operator=(const ScalarConverter &other);
+    // ScalarConverter &operator=(const ScalarConverter &other);
     ~ScalarConverter();
 public:
     static void convert(const std::string &literal);
