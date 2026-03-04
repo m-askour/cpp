@@ -7,6 +7,7 @@ class Span
 private:
     std::vector<int> number;
     unsigned int N;
+
 public:
     Span(unsigned int N);
     ~Span();

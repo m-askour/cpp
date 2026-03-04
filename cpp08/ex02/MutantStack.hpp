@@ -9,16 +9,16 @@ class MutantStack
 {
 private:
     std::vector<int> Stack;
-    unsigned int size;
 public:
     MutantStack();
     ~MutantStack();
 
-    void push(int i);
-    int top();
-    int size();
-    int begin();
-    int end();
+    void push(const T& i);//stack.push_back
+    T & top();// return stack.back
+    int size();//return stack.size()
+    typename std::vector<T>::iterator begin();
+    typename std::vector<T>::iterator end();
+    void pop();//stack.pop_back
 
 };
 

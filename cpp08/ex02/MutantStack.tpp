@@ -1,6 +1,6 @@
 #include "MutantStack.hpp"
 template <typename T>
-MutantStack<T>::MutantStack(): size(0)
+MutantStack<T>::MutantStack()
 {
 }
 template <typename T>
@@ -9,9 +9,9 @@ MutantStack<T>::~MutantStack()
 }
 template <typename T>
 
-int MutantStack<T>::top()
+T & MutantStack<T>::top()
 {
-
+    return Stack.back();
 }
 template <typename T>
 
@@ -21,22 +21,23 @@ int MutantStack<T>::size()
 }
 template <typename T>
 
-int MutantStack<T>::begin()
+typename std::vector<T>::iterator MutantStack<T>::begin()
 {
-    std::vector<int>::iterator it = Stack.begin;
-    return *it;
+    return Stack.begin();
 }
 template <typename T>
 
-int MutantStack<T>::end()
+typename std::vector<T>::iterator MutantStack<T>::end()
 {
-    std::vector<int>::iterator it = Stack.begin;
-    while(it < Stack.size() - 1)
-        it++;
-    return *it;
+    return Stack.end();
 }
-template<typename T>
-void MutantStack<T>::push(int i)
+template <typename T>
+void MutantStack<T>::push(const T& i)
 {
     Stack.push_back(i);
+}
+template <typename T>
+void MutantStack<T>::pop()
+{
+    Stack.pop_back();
 }
