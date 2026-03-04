@@ -1,7 +1,7 @@
 #ifndef SPAN_HPP
 #define SPAN_HPP
 #include <vector>
-#include <iostram>
+#include <iostream>
 class Span
 {
 private:
@@ -14,9 +14,4 @@ public:
     int shortestSpan();
     int longestSpan();
 };
-
-
-
-
-
 #endif
