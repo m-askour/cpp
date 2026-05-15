@@ -2,7 +2,7 @@
 #include <algorithm>
 //what's the span 
 
-Span::Span(unsigned int N)
+Span::Span(unsigned int N): N(N)
 {
 }
 
@@ -23,7 +23,7 @@ int Span::shortestSpan()
     std::sort(number.begin(),number.end());
     //
     int minspan = number[1] - number[0];
-    for(int i = 1; i < number.size() - 1; i++)
+    for(unsigned long i = 1; i < number.size() - 1; i++)
     {
         int curentspan = number[i + 1] - number[i];
         if(curentspan < minspan)

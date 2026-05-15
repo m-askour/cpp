@@ -3,7 +3,7 @@ template<typename T>
 void iter(T *a, T const lent, void (*function)(T &)) 
 {
     for (int i = 0; i < lent ; i++)
-        function(a[i])
+        function(a[i]);
 }
 
 template<typename T>

@@ -20,6 +20,9 @@ public:
     typename std::vector<T>::iterator begin();
     typename std::vector<T>::iterator end();
     void pop();//stack.pop_back
+
+
+
     typedef typename std::stack<T>::container_type::iterator iterator;
     iterator begin() { return this->c.begin(); }
     iterator end() { return this->c.end(); }

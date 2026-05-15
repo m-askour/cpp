@@ -5,8 +5,10 @@ Serializer::Serializer(const Serializer &other)
 {
     *this = other;
 }
-Serializer &Serializer::operator=(const Serializer &other)
+Serializer &Serializer::operator=(const Serializer& other)
 {
+    if(this != &other)
+        *this = other;
     return *this;
 }
 Serializer::~Serializer()
