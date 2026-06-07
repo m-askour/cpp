@@ -36,13 +36,13 @@ void Bureaucrat::incrementGrade()
 {
     if (this->grade <= 1)
         throw GradeTooHighException();
-    this->grade++;
+    this->grade--;
 }
 void Bureaucrat::decrementGrade()
 {
     if (this->grade >= 150)
         throw GradeTooLowException();
-    this->grade--;
+    this->grade++;
 }
 
 void Bureaucrat::signAForm(AForm  &AForm) const
