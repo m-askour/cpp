@@ -13,7 +13,7 @@ int main()
     }
     try
     {
-        Bureaucrat b2("Bob", 150);
+        Bureaucrat b2("Bob", 0);
         std::cout << b2 << std::endl;
         b2.decrementGrade();
     }
