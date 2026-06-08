@@ -10,6 +10,7 @@ ShrubberyCreationForm::~ShrubberyCreationForm()
 }
 std::string ShrubberyCreationForm:: getTarget()
 {
+    return this->target;
 }
 void ShrubberyCreationForm::execute(Bureaucrat const & executor) const
 {
@@ -18,7 +19,7 @@ void ShrubberyCreationForm::execute(Bureaucrat const & executor) const
 
     if (!this->get_sign())
         throw GradeTooLowException();
-    if (executor.getGrade() > get_grade_exec())
+    if (executor.getGrade() > this->get_grade_exec())
         throw GradeTooLowException();
     std::ofstream file(this->target + "_shrubbery");
     if (file.is_open())
