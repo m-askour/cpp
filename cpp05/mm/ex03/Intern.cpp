@@ -9,25 +9,26 @@ Intern::~Intern()
 
 AForm* Intern::makeForm(std::string formName, std::string target)
 {
-    if (formName == "shrubbery creation")
+    int i = 0;
+    std::string forms[] = {"ShrubberyCreationForm", "RobotomyRequestForm", "PresidentialPardonForm"};
+    while (i < 3 && formName != forms)
+        i++;
+    switch(i)
     {
-        std::cout << "Intern creates " << formName << std::endl;
-        return new ShrubberyCreationForm(target);
-    }
-    else if (formName == "robotomy request")
-    {
-        std::cout << "Intern creates " << formName << std::endl;
-        return new RobotomyRequestForm(target);
-    }
-    else if (formName == "presidential pardon")
-    {
-        std::cout << "Intern creates " << formName << std::endl;
-        return new PresidentialPardonForm(target);
-    }
-    else
-    {
-        std::cout << "Intern can't create " << formName
+        case 1:
+            std::cout << "Intern creates " << formName << std::endl;
+            return new ShrubberyCreationForm(target);
+    
+        case 2:
+            std::cout << "Intern creates " << formName << std::endl;
+            return new RobotomyRequestForm(target);
+    
+        case 3:
+            std::cout << "Intern creates " << formName << std::endl;
+            return new PresidentialPardonForm(target);
+        default :
+            std::cout << "Intern can't create " << formName
                   << " because it doesn't exist!" << std::endl;
-        return NULL;
-    }
+            return NULL;
+
 }
