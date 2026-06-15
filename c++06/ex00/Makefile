@@ -1,14 +1,21 @@
-c++ = g++
-c++flags = -Wall -Werror -Wextra -std=c++98
-name = Conversion
-files = main.cpp ScalarConverter.cpp
+CXX = g++
+CXXFLAGS = -Wall -Werror -Wextra -std=c++98
+NAME = Conversion
+SRC = main.cpp ScalarConverter.cpp
+OBJ = $(SRC:.cpp=.o)
 
-all: $(name)
-$(name):
-	$(c++) $(c++flags) $(files) -o $(name)
+all: $(NAME)
+
+$(NAME): $(OBJ)
+	$(CXX) $(CXXFLAGS) $(OBJ) -o $(NAME)
+
 %.o: %.cpp ScalarConverter.hpp
-	$(c++) $(c++flags) -c $< -o $@
+	$(CXX) $(CXXFLAGS) -c $< -o $@
+
 clean:
-	rm -f $(name)
+	rm -f $(OBJ)
+
 fclean: clean
+	rm -f $(NAME)
+
 re: fclean all

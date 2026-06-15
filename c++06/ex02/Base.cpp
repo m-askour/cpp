@@ -1,4 +1,6 @@
 #include "Base.hpp"
+#include <typeinfo>
+
 Base::~Base()
 {}
 Base* generate()

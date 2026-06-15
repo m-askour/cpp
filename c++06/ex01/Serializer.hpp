@@ -2,8 +2,8 @@
 #define SERIALIZER_HPP
 #include <iostream>
 #include <string>
+#include <typeinfo>
 #include <stdint.h>
-#include <cstdint>
 struct Data
 {
     std::string name;
