@@ -7,13 +7,12 @@ Serializer::Serializer(const Serializer &other)
 }
 Serializer &Serializer::operator=(const Serializer& other)
 {
-    if(this != &other)
-        *this = other;
+    (void)other;
     return *this;
 }
 Serializer::~Serializer()
 {}
-std::size_t Serializer::serialize(Data* ptr)
+uintptr_t Serializer::serialize(Data* ptr)
 {
     return reinterpret_cast<uintptr_t>(ptr);
 }

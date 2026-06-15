@@ -1,23 +1,31 @@
 #include "ScalarConverter.hpp"
 #include <cstdlib>
+ScalarConverter::ScalarConverter()
+{}
+ScalarConverter::ScalarConverter(const ScalarConverter &other)
+{
+    *this = other;
+}
+ScalarConverter &ScalarConverter::operator=(const ScalarConverter& other)
+{
+    (void)other;
+    return *this;
+}
+ScalarConverter::~ScalarConverter()
+{}
 void convert_char(std::string literal, char c, int i, float f, double d)
 {
-    // this hanle the 'x'
-    if (literal.length() == 3 && literal[0] == '\'' && literal[2] == '\'')
-        c = literal[1];
-    else
-    {
-        if (literal.length() != 1 || !std::isdigit(literal[0]))
-            throw std::invalid_argument("not char");
+    if (literal.length() == 1)
         c = literal[0];
-    }
+    else
+        throw std::invalid_argument("not char");
     if (static_cast<unsigned char>(c) > 127)
-        throw std::out_of_range("out of range");
+        throw std::invalid_argument("out of range");
     i = static_cast<int>(c);
     f = static_cast<float>(c);
     d = static_cast<double>(c);
     if (!std::isprint(c))
-        std::cout << "char: Non displayable";
+        std::cout << "char: Non displayable" << std::endl;
     else
         std::cout << "char: '" << c << "'" << std::endl;
     std::cout << "int: " << i << std::endl;
@@ -34,7 +42,7 @@ void convert_int(std::string literal, int i, float f, double d)
 {
     long l = std::atol(literal.c_str());
     if (l > 2147483647 || l < -2147483648)
-        throw std::out_of_range("out of range");
+        throw std::invalid_argument("out of range");
     i = static_cast<int>(l);
     d = static_cast<double>(i);
     f = static_cast<float>(i);
@@ -125,8 +133,8 @@ int check_liter(std::string literal)
 
     if (literal.empty())
         return 0;
-    // it's char
-    if (literal.length() == 3 && literal[0] == '\'' && literal[2] == '\'')
+    // it's char (with quotes like 'x')
+    if (literal.length() == 1)
         return 2;
     // it's just the param
     if (literal == "nan" || literal == "nanf" ||
@@ -235,12 +243,12 @@ void ScalarConverter::convert(std::string &str)
             convert_int(str, i, f, d);
             /* code */
         }
-        catch (const std::out_of_range &e)
-        {
-        }
         catch (const std::exception &e)
         {
+            std::cout << "char: impossible" << std::endl;
             std::cout << "int: impossible" << std::endl;
+            std::cout << "float: impossible" << std::endl;
+            std::cout << "double: impossible" << std::endl;
         }
     }
 }
