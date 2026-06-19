@@ -56,14 +56,20 @@ void convert_int(std::string literal, int i, float f, double d)
         std::cout << "char: Non displayable" << std::endl;
     else
         std::cout << "char: '" << static_cast<char>(i) << "'" << std::endl;
-
     if (overflow)
         std::cout << "int: impossible" << std::endl;
     else
         std::cout << "int: " << i << std::endl;
-
-    std::cout << "float: " << f << "f" << std::endl;
-    std::cout << "double: " << d << std::endl;
+    if (std::isnan(f) || std::isinf(f))
+        std::cout << "float: " << f << "f" << std::endl;
+    else if (f == static_cast<int>(f))
+        std::cout << "float: " << f << ".0f" << std::endl;
+    else
+        std::cout << "float: " << f << "f" << std::endl;
+    if (d == static_cast<int>(f))
+        std::cout << "double: " << d << ".0" << std::endl;
+    else
+        std::cout << "double: " << d << "" << std::endl;
 }
 void convert_float(std::string literal, int i, float f, double d)
 {
@@ -79,7 +85,6 @@ void convert_float(std::string literal, int i, float f, double d)
         std::cout << "char: Non displayable" << std::endl;
     else
         std::cout << "char: '" << static_cast<char>(i) << "'" << std::endl;
-
     if (std::isnan(f) || std::isinf(f))
         std::cout << "int: impossible" << std::endl;
     else
@@ -101,21 +106,20 @@ void convert_double(std::string literal, int i, float f, double d)
     d = std::atof(literal.c_str());
     f = static_cast<float>(d);
     i = static_cast<int>(d);
-    if (d < 0 || d > 127)
+    
+    if (std::isnan(d) || std::isinf(d))
         std::cout << "char: impossible" << std::endl;
-    else if (std::isnan(d) || std::isinf(d))
+    else if (d < 0 || d > 127)
         std::cout << "char: impossible" << std::endl;
     else if (!std::isprint(static_cast<char>(i)))
         std::cout << "char: Non displayable" << std::endl;
     else
         std::cout << "char: '" << static_cast<char>(i) << "'" << std::endl;
-
-    if (std::isnan(d) || std::isinf(d))
+    if (std::isnan(f) || std::isinf(f))
         std::cout << "int: impossible" << std::endl;
     else
         std::cout << "int: " << i << std::endl;
 
-    // FIX: Check for NaN/Inf BEFORE checking f == static_cast<int>(f)
     if (std::isnan(f) || std::isinf(f))
         std::cout << "float: " << f << "f" << std::endl;
     else if (f == static_cast<int>(f))
@@ -123,7 +127,6 @@ void convert_double(std::string literal, int i, float f, double d)
     else
         std::cout << "float: " << f << "f" << std::endl;
 
-    // FIX: Check for NaN/Inf BEFORE checking d == static_cast<int>(d)
     if (std::isnan(d) || std::isinf(d))
         std::cout << "double: " << d << std::endl;
     else if (d == static_cast<int>(d))
@@ -185,6 +188,8 @@ void ScalarConverter::convert(std::string &str)
     }
     else if (type == 1)
     {
+        std::cout<< "iteratoer" << std::endl;
+
         std::cout << "char: impossible" << std::endl;
         std::cout << "int: impossible" << std::endl;
 
@@ -204,6 +209,8 @@ void ScalarConverter::convert(std::string &str)
     }
     else if (type == 2)
     {
+        std::cout<< "char" << std::endl;
+
         try
         {
             convert_char(str, c, i, f, d);
@@ -212,9 +219,12 @@ void ScalarConverter::convert(std::string &str)
         {
             std::cout << "char: impossible" << std::endl;
         }
+        return;
     }
     else if (type == 3)
     {
+        std::cout<< "float" << std::endl;
+
         try
         {
             convert_float(str, i, f, d);
@@ -223,9 +233,12 @@ void ScalarConverter::convert(std::string &str)
         {
             std::cout << "float: impossible" << std::endl;
         }
+        return;
     }
     else if (type == 4)
     {
+        std::cout<< "double" << std::endl;
+
         try
         {
             convert_double(str, i, f, d);
@@ -235,9 +248,11 @@ void ScalarConverter::convert(std::string &str)
         {
             std::cout << "double: impossible" << std::endl;
         }
+        return;
     }
     else if (type == 5) // int
     {
+        std::cout<< "int" << std::endl;
         try
         {
             convert_int(str, i, f, d);
@@ -247,5 +262,6 @@ void ScalarConverter::convert(std::string &str)
         {
             std::cout << "int: impossible" << std::endl;
         }
+        return;
     }
 }
