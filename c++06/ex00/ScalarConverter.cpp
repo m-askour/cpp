@@ -115,6 +115,7 @@ void convert_double(std::string literal, int i, float f, double d)
     else
         std::cout << "int: " << i << std::endl;
 
+    // FIX: Check for NaN/Inf BEFORE checking f == static_cast<int>(f)
     if (std::isnan(f) || std::isinf(f))
         std::cout << "float: " << f << "f" << std::endl;
     else if (f == static_cast<int>(f))
@@ -122,6 +123,7 @@ void convert_double(std::string literal, int i, float f, double d)
     else
         std::cout << "float: " << f << "f" << std::endl;
 
+    // FIX: Check for NaN/Inf BEFORE checking d == static_cast<int>(d)
     if (std::isnan(d) || std::isinf(d))
         std::cout << "double: " << d << std::endl;
     else if (d == static_cast<int>(d))
