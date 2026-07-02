@@ -30,8 +30,6 @@ int Span::shortestSpan()
             minspan = curentspan; 
     }
     return minspan;
-
-
 }
 int Span::longestSpan()
 { 

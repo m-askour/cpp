@@ -1,43 +1,29 @@
-#include "MutantStack.hpp"
 template <typename T>
-MutantStack<T>::MutantStack()
+MutantStack<T>::MutantStack() : std::stack<T>()
 {
+}
+template <typename T>
+MutantStack<T>::MutantStack(const MutantStack<T>& other) : std::stack<T>(other)
+{
+}
+template <typename T>
+MutantStack<T>& MutantStack<T>::operator=(const MutantStack<T>& other)
+{
+    if (this != &other)
+        std::stack<T>::operator=(other);
+    return *this;
 }
 template <typename T>
 MutantStack<T>::~MutantStack()
 {
 }
 template <typename T>
-
-T & MutantStack<T>::top()
+typename MutantStack<T>::iterator MutantStack<T>::begin()
 {
-    return Stack.back();
+    return this->c.begin();
 }
 template <typename T>
-
-int MutantStack<T>::size()
+typename MutantStack<T>::iterator MutantStack<T>::end()
 {
-    return Stack.size();
-}
-template <typename T>
-
-typename std::vector<T>::iterator MutantStack<T>::begin()
-{
-    return Stack.begin();
-}
-template <typename T>
-
-typename std::vector<T>::iterator MutantStack<T>::end()
-{
-    return Stack.end();
-}
-template <typename T>
-void MutantStack<T>::push(const T& i)
-{
-    Stack.push_back(i);
-}
-template <typename T>
-void MutantStack<T>::pop()
-{
-    Stack.pop_back();
+    return this->c.end();
 }

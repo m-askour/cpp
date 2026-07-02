@@ -11,21 +11,13 @@ private:
     std::vector<int> Stack;
 public:
     MutantStack();
+    MutantStack(const MutantStack<T>& other);
+    MutantStack<T>& operator=(const MutantStack<T>& other);
     ~MutantStack();
 
-    void push(const T& i);//stack.push_back
-    T & top();// return stack.back
-    int size();//return stack.size()
-    typedef typename std::vector<T>::iterator iterator;
-    typename std::vector<T>::iterator begin();
-    typename std::vector<T>::iterator end();
-    void pop();//stack.pop_back
-
-
-
     typedef typename std::stack<T>::container_type::iterator iterator;
-    iterator begin() { return this->c.begin(); }
-    iterator end() { return this->c.end(); }
+    iterator begin();
+    iterator end();
 };
-
+#include"MutantStack.tpp"
 #endif
