@@ -15,6 +15,13 @@ void Span::addNumber(int num)
         throw std::runtime_error("the size is the maxe of what we prifire");
     number.push_back(num);
 }
+void Span::addNumbers(Iterator first, Iterator last)
+{
+    if (number.size() + std::distance(first, last) > N)
+        throw std::runtime_error("Span is full");
+
+    number.insert(number.end(), first, last);
+}
 int Span::shortestSpan()
 {
     if(number.size() <= 1)
