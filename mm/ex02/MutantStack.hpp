@@ -37,14 +37,4 @@ public:
     {
         return this->c.end();
     }
-    typedef typename std::stack<T>::container_type::iterator constiterator;
-
-    constiterator bigin() const
-    {
-        return this->c.begin();//c is the contener atribute it's in the stack class
-    }
-    constiterator end() const
-    {
-        return this->c.end();
-    }
 };
