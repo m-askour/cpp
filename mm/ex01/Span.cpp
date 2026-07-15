@@ -1,17 +1,15 @@
 #include"Span.hpp"
-Span::Span():N(0)
-{
-    throw std::runtime_error("there is no value");
-}
+
 Span::Span(unsigned int N):N(N)
 {}
-Span::Span(const Span&other):N(other.N)
+Span::Span(const Span&other):N(other.N), vec(other.vec)
 {}
 Span& Span::operator=(const Span& other)
 {
     if(this != &other)
     {
         N = other.N;
+        vec = other.vec;
     }
     return *this;
 }
