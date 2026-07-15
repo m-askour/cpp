@@ -24,6 +24,12 @@ void Span::addNumber(int number)
     }
     vec.push_back(number);
 }
+void Span::addnumbers(int first, int last)
+{
+    if(vec.size() + std::distance(first, last) > N)
+        throw std::runtime_error("the size is not inaph");
+    vec.insert(vec.end(),forst,last);
+}
 long long  Span::shortestSpan()
 {
     if(vec.size() < 2)
@@ -37,10 +43,6 @@ long long  Span::shortestSpan()
             min_span = static_cast<long long >(vec[i+1]) - vec[i];
     }
     return min_span;
-}
-void Span::addnumbers()
-{
-    
 }
 long long Span::longestSpan()
 {
