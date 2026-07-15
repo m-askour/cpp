@@ -17,7 +17,8 @@ public:
     Span& operator=(const Span& other);
     ~Span();
 
-    void addNumber(int number);//this shuld throw an exception if there is this number
+    void addNumber(int number);//this shuld throw an exception if there is this number7
+    void addNumber(int first, int last);
     long long  shortestSpan();//if there are no number or just 1 number >>>throw exception
     long long longestSpan();//if there are no number or just 1 number >>>throw exception
 };
