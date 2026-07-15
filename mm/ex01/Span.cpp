@@ -22,13 +22,12 @@ void Span::addNumber(int number)
     {
         throw std::runtime_error("the size is not inaph");
     }
-    if (std::count(vec.begin(),vec.end(),number) != 0)
-        throw std::runtime_error("this number is alridy exist");
     vec.push_back(number);
 }
 long long  Span::shortestSpan()
 {
-   
+    if(vec.size() < 2)
+        throw std::runtime_error("Not enough numbers");
     sort(vec.begin(),vec.end()); 
     long long min_span =static_cast<long long >(vec[1])- vec[0];
 
@@ -39,11 +38,14 @@ long long  Span::shortestSpan()
     }
     return min_span;
 }
+void Span::addnumbers()
+{
+    
+}
 long long Span::longestSpan()
 {
-    if(vec.empty() || vec.size() <= 1)
-        throw std::runtime_error("there is not numbers");
-    sort(vec.begin(),vec.end()); 
+    if(vec.size() < 2)
+        throw std::runtime_error("there is not numbers"); 
     long long max_elemnt = *std::max_element(vec.begin(),vec.end());
     long long min_element  = *std::min_element(vec.begin(),vec.end());
     return max_elemnt - min_element;
