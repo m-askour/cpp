@@ -1,21 +1,20 @@
-#include "easyfind.hpp"
+#include"easyfind.hpp"
 
-int main ()
+int main()
 {
-    try
-    {
-        std::vector<int>v;
-        v.push_back(10);
-        v.push_back(20);
-        v.push_back(30);
-        std::vector<int>::iterator it = easyfind(v , 20);
-        std::cout << *it << std::endl;
-        easyfind(v, 100);//this to throw the exeption
-
+try
+{   std::vector<int> str;
+    str.push_back(1);
+    str.push_back(3);
+    str.push_back(6);
+    str.push_back(100);
+    str.push_back(30);
+    std::vector<int>::iterator it;
+    it = easyfind(str,300);
+    std::cout<<*it<<std::endl;
     }
-    catch(const std::exception& e)
+    catch(std::exception &e)
     {
-        std::cerr << e.what() << '\n';
+        std::cout<<e.what()<<std::endl;
     }
-    
 }

@@ -1,23 +1,40 @@
-#ifndef MUTANTSTACK_HPP
-#define MUTANTSTACK_HPP
+#pragma once
+
 #include <stack>
-#include <iterator>
-#include <iostream>
-#include <vector>
-template<typename T>
+#include<iostream>
+template <typename T>
 class MutantStack : public std::stack<T>
 {
-private:
-    std::vector<int> Stack;
 public:
-    MutantStack();
-    MutantStack(const MutantStack<T>& other);
-    MutantStack<T>& operator=(const MutantStack<T>& other);
-    ~MutantStack();
+    MutantStack() : std::stack<T>()
+    {
+    }
 
+    MutantStack(const MutantStack& other)
+        : std::stack<T>(other)
+    {
+    }
+
+    MutantStack& operator=(const MutantStack& other)
+    {
+        if (this != &other)
+            std::stack<T>::operator=(other);
+        return *this;
+    }
+
+    ~MutantStack()
+    {
+    }
+    //rename the iterator
     typedef typename std::stack<T>::container_type::iterator iterator;
-    iterator begin();
-    iterator end();
+
+    iterator begin()
+    {
+        return this->c.begin();
+    }
+
+    iterator end()
+    {
+        return this->c.end();
+    }
 };
-#include"MutantStack.tpp"
-#endif

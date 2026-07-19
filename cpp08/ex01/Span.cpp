@@ -1,48 +1,54 @@
-#include "Span.hpp"
-#include <algorithm>
-//what's the span 
+#include"Span.hpp"
 
-Span::Span(unsigned int N): N(N)
+Span::Span(unsigned int N):N(N)
+{}
+Span::Span(const Span&other):N(other.N), vec(other.vec)
+{}
+Span& Span::operator=(const Span& other)
 {
+    if(this != &other)
+    {
+        N = other.N;
+        vec = other.vec;
+    }
+    return *this;
 }
-
 Span::~Span()
 {
-}    
-void Span::addNumber(int num)
-{
-    if (number.size() >= N)
-        throw std::runtime_error("the size is the maxe of what we prifire");
-    number.push_back(num);
 }
-void Span::addNumbers(Iterator first, Iterator last)
+void Span::addNumber(int number)
 {
-    if (number.size() + std::distance(first, last) > N)
-        throw std::runtime_error("Span is full");
-
-    number.insert(number.end(), first, last);
-}
-int Span::shortestSpan()
-{
-    if(number.size() <= 1)
-        throw std::runtime_error("there is just one value no spam");
-    // std::vector<int>::iterator it = number.begin();
-    std::sort(number.begin(),number.end());
-    //
-    int minspan = number[1] - number[0];
-    for(unsigned long i = 1; i < number.size() - 1; i++)
+    if(vec.size() >= N)
     {
-        int curentspan = number[i + 1] - number[i];
-        if(curentspan < minspan)
-            minspan = curentspan; 
+        throw std::runtime_error("the size is not inaph");
     }
-    return minspan;
+    vec.push_back(number);
 }
-int Span::longestSpan()
-{ 
-    if(number.size() <= 1)
-        throw std::runtime_error("there is just one value no spam");
-    std::vector<int>::iterator maxit = std::max_element(number.begin(), number.end());
-    std::vector<int>::iterator minit = std::min_element(number.begin(), number.end());
-    return (*maxit - *minit);
+void Span::addnumbers(int first, int last)
+{
+    if(vec.size() + std::distance(first, last) > N)
+        throw std::runtime_error("the size is not inaph");
+    vec.insert(vec.end(),forst,last);
+}
+long long  Span::shortestSpan()
+{
+    if(vec.size() < 2)
+        throw std::runtime_error("Not enough numbers");
+    sort(vec.begin(),vec.end()); 
+    long long min_span =static_cast<long long >(vec[1])- vec[0];
+
+    for(unsigned int i=1; i<vec.size()-1;i++)
+    {
+        if(static_cast<long long >(vec[i+1]) - vec[i] < min_span)
+            min_span = static_cast<long long >(vec[i+1]) - vec[i];
+    }
+    return min_span;
+}
+long long Span::longestSpan()
+{
+    if(vec.size() < 2)
+        throw std::runtime_error("there is not numbers"); 
+    long long max_elemnt = *std::max_element(vec.begin(),vec.end());
+    long long min_element  = *std::min_element(vec.begin(),vec.end());
+    return max_elemnt - min_element;
 }
