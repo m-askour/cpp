@@ -1,5 +1,5 @@
 #include"MutantStack.hpp"
-#include<list>
+#include<deque>
 int main()
 {
     MutantStack<int> mstack;
@@ -23,24 +23,23 @@ int main()
         std::cout << *it << std::endl;
         ++it;
     }
-    std::stack<int> s(mstack);
-    //test the list 
-    std::cout<<"list test "<<std::endl;
-    std::list<int> list;
-    list.push_back(5);
-    list.push_back(17);
-    list.pop_back();
-    std::cout << list.size() << std::endl;
-    list.push_back(3);
-    list.push_back(5);
-    list.push_back(737);
-    list.push_back(3);
-
-    std::list<int>::iterator list_it ;
-    std::list<int>::iterator list_ite = list.end();
-    for(list_it = list.begin();list_it != list_ite;++list_it)
+    //test the deque as a default container of the stack 
+    std::cout<<"deque test "<<std::endl;
+    std::deque<int> deque;
+    deque.push_back(5);
+    deque.push_back(17);
+    deque.pop_back();
+    std::cout << deque.size() << std::endl;
+    deque.push_back(3);
+    deque.push_back(5);
+    deque.push_back(737);
+    deque.push_back(3);
+    deque.push_back(0);
+    std::deque<int>::iterator deque_it ;
+    std::deque<int>::iterator deque_ite = deque.end();
+    for(deque_it = deque.begin();deque_it != deque_ite;++deque_it)
     {
-        std::cout<<*list_it<<std::endl;
+        std::cout<<*deque_it<<std::endl;
     }
     return 0;
 }
