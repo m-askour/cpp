@@ -4,6 +4,8 @@
 #include <sstream>
 #include <map>
 #include <string>
+#include <cstdlib>
+
 class BitcoinExchange
 {
 private:
@@ -18,6 +20,9 @@ public:
     void readFile(const std::string &filename);
     void set_date(std::string data) ;
     std::string get_date() const;
+    int parsing_Date(std::string Data_stor);
+    int parsing_line(std::string &line);
+    int parsing_value(std::string Data_stor);
     void set_value(float val) ;
     float get_value() const;
 };
