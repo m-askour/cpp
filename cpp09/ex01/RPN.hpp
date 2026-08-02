@@ -14,7 +14,7 @@ public:
     RPN(const RPN &other);
     RPN &operator=(const RPN &other);
     ~RPN();
-    void evaluate(const std::string &expression);
+    int evaluate(const std::string &expression);
 };
 
 

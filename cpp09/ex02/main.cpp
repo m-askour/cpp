@@ -1,12 +1,17 @@
 #include"PmergeMe.hpp"
+
 int main(int ac, char **av)
 {
-    if(ac != 2)
+    if(ac > 2)
     {
         std::cout << "Error: Invalid number of arguments" << std::endl;
         return 1;
     }
     PmergeMe pmerge;
-    pmerge.processInput(av[1]);
+    for(int i = 0 ; i < ac; i++)
+    {
+    
+        return(pmerge.processInput(av[i]));
+    }
     return 0;
 }

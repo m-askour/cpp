@@ -3,17 +3,20 @@
 #include <fstream>
 #include <sstream>
 #include <stack>
+#include<vector>
+#include<deque>
 #include <string>
 class PmergeMe
 {
     private:
-        std::stack<int> stack;
+        std::vector<int> digits;
+        std::deque<int> stor;
     public:
         PmergeMe(/* args */);
         PmergeMe(const PmergeMe &other);
         PmergeMe &operator=(const PmergeMe &other);
         ~PmergeMe();
-        void processInput(const std::string &input);
+        int processInput(const std::string &input);
 };
 
 
