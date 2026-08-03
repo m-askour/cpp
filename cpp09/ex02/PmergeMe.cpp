@@ -38,6 +38,21 @@ static int check_value(std::string input)
     }
     return 0;    
 }
+std::vector<int> PmergeMe::Ford_Johnson_sortingI(const std::deque<int>& sort)
+{
+    //1-premier step split the numbers to pair
+    std::vector<int> pair;
+    pair split_pair(sort);
+    //2-sort the pairs the big in right the smal in the left
+    std::vector<int> sorting_pair = sort_pair(pair);
+    //3- takce the all the right number from the pirse and pic it in the magor number then sort it 
+    majour_num = handle_major(pair);
+    std::vector<int> sorting  = sort_major(majour_num);
+    //4- tack the left numbers and put it in the minor number
+    minor_num = handle_minor(pair);
+    //5-insert the small numbers one by one
+    insert_min_in_maj(sorting,minor_num);
+}
 int PmergeMe::processInput(const std::string &input)
 {
         //checl the input is it valid
@@ -47,4 +62,7 @@ int PmergeMe::processInput(const std::string &input)
         unsigned int num = static_cast<unsigned int>(std::atoi(input.c_str()));
         //add the number in deque
         stor.push_back(num);
+        std::vector<int> result;
+        result = Ford_Johnson_sortingI(stor);
+        return 0;
 }
