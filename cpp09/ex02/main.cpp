@@ -10,8 +10,9 @@ int main(int ac, char **av)
     PmergeMe pmerge;
     for(int i = 0 ; i < ac; i++)
     {
-    
-        return(pmerge.processInput(av[i]));
+        if(pmerge.processInput(av[i]))
+            return 1;
     }
+    pmerge.run();
     return 0;
 }
