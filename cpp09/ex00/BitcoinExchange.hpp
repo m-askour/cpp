@@ -18,6 +18,8 @@ public:
     BitcoinExchange &operator=(const BitcoinExchange &other);
     ~BitcoinExchange();
     void readFile(const std::string &filename);
+    void loadDatabase(const std::string &filename);
+    float getClosestRate(const std::string &date);
     void set_date(std::string data) ;
     std::string get_date() const;
     int parsing_Date(std::string Data_stor);

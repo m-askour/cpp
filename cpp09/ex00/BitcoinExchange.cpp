@@ -20,7 +20,7 @@ BitcoinExchange::~BitcoinExchange()
 }
 static int check_year(long year)
 {
-    if (year < 2009 || year > 2023)
+    if (year < 1)
         return 1;
     return 0;
 }
@@ -30,12 +30,24 @@ static int check_month(long month)
         return 1;
     return 0;
 }
-static int check_day(long day)
+static int is_leap(long year)
 {
-    if (day < 1 || day > 31)
+    if ((year % 4 == 0 && year % 100 != 0) || year % 400 == 0)
         return 1;
     return 0;
-} 
+}
+static int check_day(long year, long month, long day)
+{
+    static const int days_in_month[12] = {31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31};
+    if (month < 1 || month > 12)
+        return 1;
+    int max_day = days_in_month[month - 1];
+    if (month == 2 && is_leap(year))
+        max_day = 29;
+    if (day < 1 || day > max_day)
+        return 1;
+    return 0;
+}
 int check_all_int(const std::string &str)
 {
     for (std::string::size_type i = 0; i < str.length(); ++i)
@@ -48,7 +60,15 @@ int check_all_int(const std::string &str)
 int check_all_float(const std::string &str)
 {
     int dot_count = 0;
-    for (size_t i = 0; i < str.size(); ++i)
+    size_t i = 0;
+
+    if (str.empty())
+        return 1;
+    if (str[0] == '-' || str[0] == '+')
+        i = 1;
+    if (i == str.size())
+        return 1;
+    for (; i < str.size(); ++i)
     {
         if (str[i] == '.')
         {
@@ -88,7 +108,7 @@ int BitcoinExchange::parsing_Date(std::string Data_stor)
     long month_int = std::atol(month.c_str());
     long day_int = std::atol(day.c_str());
 
-    if (check_year(year_int) || check_month(month_int) || check_day(day_int))
+    if (check_year(year_int) || check_month(month_int) || check_day(year_int, month_int, day_int))
     {
         std::cout << "Error: bad input." << std::endl;
         return 1;
@@ -150,10 +170,7 @@ int BitcoinExchange::parsing_line(std::string &line)
     if (first != std::string::npos)
         value_stor = value_stor.substr(first);
     if(parsing_value(value_stor))
-    {
-        std::cout << "Error: bad input ." << std::endl;
         return 1;
-    }
     return 0;
 }
 static int first_line(std::string line)
@@ -162,8 +179,46 @@ static int first_line(std::string line)
         return 1;
     return 0;
 }
+
+void BitcoinExchange::loadDatabase(const std::string &filename)
+{
+    std::ifstream file(filename.c_str());
+    std::string line;
+
+    if (!file.is_open())
+    {
+        std::cout << "Error: could not open database file." << std::endl;
+        return;
+    }
+    std::getline(file, line); // skip "date,exchange_rate" header
+    while (std::getline(file, line))
+    {
+        size_t comma = line.find(',');
+        if (comma == std::string::npos)
+            continue;
+        std::string date = line.substr(0, comma);
+        std::string rate = line.substr(comma + 1);
+        exchangeRates[date] = static_cast<float>(strtod(rate.c_str(), NULL));
+    }
+}
+
+float BitcoinExchange::getClosestRate(const std::string &date)
+{
+    std::map<std::string, float>::iterator it = exchangeRates.lower_bound(date);
+
+    if (it != exchangeRates.end() && it->first == date)
+        return it->second;
+    if (it == exchangeRates.begin())
+        return 0.0f; // no earlier date available in the database
+    --it;
+    return it->second;
+}
 void BitcoinExchange::readFile(const std::string &filename)
 {
+    loadDatabase("data.csv");
+    if (exchangeRates.empty())
+        return;
+
     std::ifstream file(filename.c_str());
     std::string line;
     if (!file.is_open())
@@ -183,20 +238,13 @@ void BitcoinExchange::readFile(const std::string &filename)
     }
     while (std::getline(file, line))
     {
-        // std::cout << line << std::endl;if (line == "Date | value")
         if (parsing_line(line))
             continue;
-        // sepatation the part's to put it in the map line by line and separat the value
-        // key1 = Date;
-        // separation |
         std::string Date = get_date();
         float value = get_value();
-        // key 2 = value
-        exchangeRates[Date] = value;
+        float rate = getClosestRate(Date);
+        std::cout << Date << " => " << value << " = " << (value * rate) << std::endl;
     }
-    std::map<std::string, float>::iterator it;
-    for (it = exchangeRates.begin(); it != exchangeRates.end(); it++)
-        std::cout << it->first << "=>" << it->second << std::endl;
 }
 void BitcoinExchange::set_date(std::string data) 
 {
