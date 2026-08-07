@@ -152,7 +152,7 @@ int BitcoinExchange::parsing_line(std::string &line)
     size_t find  = line.find('|');
     if (find == std::string::npos)
     {
-        std::cout << "Error: bad input ." << std::endl;
+        std::cout << "Error: bad input" << " => " << line << std::endl;
         return 1;
     }
     // we have date befor the separation
