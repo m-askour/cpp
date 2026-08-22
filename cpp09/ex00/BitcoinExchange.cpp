@@ -81,6 +81,13 @@ int check_all_float(const std::string &str)
     }
     return 0;
 }
+
+static int is_valid(const std::string &str, int expected_len)
+{
+    if (static_cast<int>(str.length()) != expected_len)
+        return 1;
+    return 0;
+}
 int BitcoinExchange::parsing_Date(std::string Data_stor)
 {
     std::string year;
@@ -103,7 +110,12 @@ int BitcoinExchange::parsing_Date(std::string Data_stor)
     year = Data_stor.substr(0, first);
     month = Data_stor.substr(first + 1, second - first - 1);
     day = Data_stor.substr(second + 1);
-
+    //check evry thing is it's number befor check is it exist
+    if (is_valid(year, 4) || is_valid(month, 2) || is_valid(day, 2))
+    {
+        std::cout << "Error: bad input." << std::endl;
+        return 1;
+    }
     long year_int = std::atol(year.c_str());
     long month_int = std::atol(month.c_str());
     long day_int = std::atol(day.c_str());
@@ -204,7 +216,7 @@ void BitcoinExchange::loadDatabase(const std::string &filename)
 
 float BitcoinExchange::getClosestRate(const std::string &date)
 {
-    std::map<std::string, float>::iterator it = exchangeRates.lower_bound(date);
+    std::map<std::string, float>::iterator it = exchangeRates.lower_bound(date);//thsis function return an iterator to the first element that is not less than the given key (date), if all elements are lisse than  
 
     if (it != exchangeRates.end() && it->first == date)
         return it->second;

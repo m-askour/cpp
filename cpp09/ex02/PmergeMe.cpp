@@ -1,12 +1,15 @@
 #include "PmergeMe.hpp"
 
-PmergeMe::PmergeMe(/* args */):stor(0),digits(0)
+PmergeMe::PmergeMe():stor(0),digits(0),storVec(0),minor_num(0),majour_num(0)
 {
 }
 PmergeMe::PmergeMe(const PmergeMe &other)
 {
     this->stor = other.stor;
     this->digits = other.digits;
+    this->storVec = other.storVec;
+    this->minor_num = other.minor_num;
+    this->majour_num = other.majour_num;
 }
 
 PmergeMe &PmergeMe::operator=(const PmergeMe &other)
@@ -15,6 +18,9 @@ PmergeMe &PmergeMe::operator=(const PmergeMe &other)
     {
         this->stor = other.stor;
         this->digits = other.digits;
+        this->storVec = other.storVec;
+        this->minor_num = other.minor_num;
+        this->majour_num = other.majour_num;
     }
     return *this;
 }
@@ -112,11 +118,7 @@ std::vector<int> PmergeMe::handle_minor(std::vector<int> pair)
     }
     return minor;
 }
-static std::vector<int> sort_major(std::vector<int> major)
-{
-    std::sort(major.begin(),major.end());
-    return major;
-}
+
 static void insert_min_in_maj(std::vector<int> &major,std::vector<int> minor)
 {
     std::vector<int> order = jacobsthal_order(minor.size());
@@ -263,8 +265,6 @@ int PmergeMe::processInput(const std::string &input)
         //add the number in deque
         stor.push_back(num);
         storVec.push_back(num);
-        /*std::vector<int> result;
-        result = Ford_Johnson_sortingI(stor);*/
         return 0;
 }
 void PmergeMe::run()

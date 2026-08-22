@@ -129,7 +129,6 @@ int RPN::evaluate(const std::string &expression)
         std::cerr << "Error" << std::endl;
         return 1;
     }
-
     std::cout << stack.top() << std::endl;
     return 0;
 }
