@@ -1,6 +1,7 @@
 #include "BitcoinExchange.hpp"
 BitcoinExchange::BitcoinExchange() : Date(""), value(0.0f), exchangeRates()
-{}
+{
+}
 BitcoinExchange::BitcoinExchange(const BitcoinExchange &other)
 {
     *this = other;
@@ -102,7 +103,7 @@ int BitcoinExchange::parsing_Date(std::string Data_stor)
         std::cout << "Error: bad input." << std::endl;
         return 1;
     }
-    if(check_all_int(Data_stor.substr(0, first)) || check_all_int(Data_stor.substr(first + 1, second - first - 1)) || check_all_int(Data_stor.substr(second + 1)))
+    if (check_all_int(Data_stor.substr(0, first)) || check_all_int(Data_stor.substr(first + 1, second - first - 1)) || check_all_int(Data_stor.substr(second + 1)))
     {
         std::cout << "Error: bad input." << std::endl;
         return 1;
@@ -110,7 +111,7 @@ int BitcoinExchange::parsing_Date(std::string Data_stor)
     year = Data_stor.substr(0, first);
     month = Data_stor.substr(first + 1, second - first - 1);
     day = Data_stor.substr(second + 1);
-    //check evry thing is it's number befor check is it exist
+    // check evry thing is it's number befor check is it exist
     if (is_valid(year, 4) || is_valid(month, 2) || is_valid(day, 2))
     {
         std::cout << "Error: bad input." << std::endl;
@@ -132,8 +133,8 @@ int BitcoinExchange::parsing_Date(std::string Data_stor)
 }
 int BitcoinExchange::parsing_value(std::string Data_stor)
 {
-    //convert it from string to float 
-    if(check_all_float(Data_stor))
+    // convert it from string to float
+    if (check_all_float(Data_stor))
     {
         std::cout << "Error: bad input." << std::endl;
         return 1;
@@ -141,7 +142,6 @@ int BitcoinExchange::parsing_value(std::string Data_stor)
     double value_double = strtod(Data_stor.c_str(), NULL);
     float value_float = static_cast<float>(value_double);
 
-    
     if (value_float < 0)
     {
         std::cout << "Error: not a positive number." << std::endl;
@@ -158,30 +158,26 @@ int BitcoinExchange::parsing_value(std::string Data_stor)
     return 0;
 }
 int BitcoinExchange::parsing_line(std::string &line)
-{ 
+{
     std::string Date_stor;
     std::string value_stor;
-    size_t find  = line.find('|');
+    size_t find = line.find('|');
     if (find == std::string::npos)
     {
         std::cout << "Error: bad input" << " => " << line << std::endl;
         return 1;
     }
-    // we have date befor the separation
     Date_stor = line.substr(0, find);
-    //remove spaces from the Date
     size_t last = Date_stor.find_last_not_of(" \t");
     if (last != std::string::npos)
         Date_stor = Date_stor.substr(0, last + 1);
-    if(parsing_Date(Date_stor))
+    if (parsing_Date(Date_stor))
         return 1;
-    // we have the value after we finde the siparation
     value_stor = line.substr(find + 1);
-    //remove spaces from the value
     size_t first = value_stor.find_first_not_of(" \t");
     if (first != std::string::npos)
         value_stor = value_stor.substr(first);
-    if(parsing_value(value_stor))
+    if (parsing_value(value_stor))
         return 1;
     return 0;
 }
@@ -202,7 +198,7 @@ void BitcoinExchange::loadDatabase(const std::string &filename)
         std::cout << "Error: could not open database file." << std::endl;
         return;
     }
-    std::getline(file, line); // skip "date,exchange_rate" header
+    std::getline(file, line);
     while (std::getline(file, line))
     {
         size_t comma = line.find(',');
@@ -210,26 +206,18 @@ void BitcoinExchange::loadDatabase(const std::string &filename)
             continue;
         std::string date = line.substr(0, comma);
         std::string rate = line.substr(comma + 1);
-        exchangeRates[date] = static_cast<float>(strtod(rate.c_str(), NULL));
+        exchangeRates[date] = static_cast<float>(strtod(rate.c_str(), NULL));//this convert string to const char than to doubel than to float
     }
 }
 
-float BitcoinExchange::getClosestRate(const std::string &date)
-{
-    std::map<std::string, float>::iterator it = exchangeRates.lower_bound(date);//thsis function return an iterator to the first element that is not less than the given key (date), if all elements are lisse than  
-
-    if (it != exchangeRates.end() && it->first == date)
-        return it->second;
-    if (it == exchangeRates.begin())
-        return 0.0f; // no earlier date available in the database
-    --it;
-    return it->second;
-}
 void BitcoinExchange::readFile(const std::string &filename)
 {
     loadDatabase("data.csv");
     if (exchangeRates.empty())
+    {
+        std::cout << "Error: there is no data." << std::endl;
         return;
+    }
 
     std::ifstream file(filename.c_str());
     std::string line;
@@ -243,9 +231,9 @@ void BitcoinExchange::readFile(const std::string &filename)
         std::cout << "Error: file is empty." << std::endl;
         return;
     }
-    if(!first_line(line))
+    if (!first_line(line))
     {
-        std::cout << "Error: Invalid headar" << std::endl;
+        std::cout << "Error: Invalid headar." << std::endl;
         return ;
     }
     while (std::getline(file, line))
@@ -257,16 +245,32 @@ void BitcoinExchange::readFile(const std::string &filename)
         float rate = getClosestRate(Date);
         std::cout << Date << " => " << value << " = " << (value * rate) << std::endl;
     }
+    if(line.empty())
+    {
+        std::cout << "Error: there is no data" << std::endl;
+        return ;
+    }
 }
-void BitcoinExchange::set_date(std::string data) 
+float BitcoinExchange::getClosestRate(const std::string &date)
+{
+    std::map<std::string, float>::iterator it = exchangeRates.lower_bound(date); // thsis function return an iterator to the first element that is not less than the given key (date), if all elements are lisse than
+
+    if (it != exchangeRates.end() && it->first == date)
+        return it->second;
+    if (it == exchangeRates.begin())
+        return 0.0f;
+    --it;
+    return it->second;
+}
+void BitcoinExchange::set_date(std::string data)
 {
     this->Date = data;
 }
-void BitcoinExchange::set_value(float val) 
+void BitcoinExchange::set_value(float val)
 {
     this->value = val;
 }
-std::string BitcoinExchange::get_date()const
+std::string BitcoinExchange::get_date() const
 {
     return Date;
 }

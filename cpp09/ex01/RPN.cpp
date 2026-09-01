@@ -48,7 +48,7 @@ int RPN::evaluate(const std::string &expression)
         return 1;
     }
 
-    std::string::size_type i = 0;
+    size_t i = 0;
 
     while (i < expression.length())
     {
@@ -58,7 +58,6 @@ int RPN::evaluate(const std::string &expression)
         }
         else if (std::isdigit(expression[i]))
         {
-            // Reject numbers larger than one digit
             if (i + 1 < expression.length() &&
                 std::isdigit(expression[i + 1]))
             {
@@ -87,30 +86,30 @@ int RPN::evaluate(const std::string &expression)
 
             switch (expression[i])
             {
-                case '+':
-                    result = num1 + num2;
-                    break;
+            case '+':
+                result = num1 + num2;
+                break;
 
-                case '-':
-                    result = num1 - num2;
-                    break;
+            case '-':
+                result = num1 - num2;
+                break;
 
-                case '*':
-                    result = num1 * num2;
-                    break;
+            case '*':
+                result = num1 * num2;
+                break;
 
-                case '/':
-                    if (num2 == 0)
-                    {
-                        std::cerr << "Error can't dive by 0" << std::endl;
-                        return 1;
-                    }
-                    result = num1 / num2;
-                    break;
-
-                default:
-                    std::cerr << "Error " << std::endl;
+            case '/':
+                if (num2 == 0)
+                {
+                    std::cerr << "Error can't dive by 0" << std::endl;
                     return 1;
+                }
+                result = num1 / num2;
+                break;
+
+            default:
+                std::cerr << "Error " << std::endl;
+                return 1;
             }
 
             if (result > INT_MAX || result < INT_MIN)
